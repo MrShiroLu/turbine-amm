@@ -1,4 +1,5 @@
-# AMM
+# Turbine Automated Market Maker
+
 
 A constant-product (`x * y = k`) automated market maker, written with Anchor.
 Two-token liquidity pools: provide liquidity, swap, and withdraw. Built for the
