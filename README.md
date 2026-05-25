@@ -80,19 +80,4 @@ cd tests && cargo test
 There is one test per instruction plus the main failure paths (bad fee,
 identical mints, zero amounts, and slippage on deposit/swap/withdraw).
 
-## Toolchain notes
-
-These come up on Solana 3.1 / rustc 1.93:
-
-- `could not compile getrandom` during `anchor build`: a build-dependency
-  (`cc` -> `jobserver` -> `getrandom 0.3.x`) that doesn't build here. The
-  committed `Cargo.lock` pins `jobserver` to 0.1.32 to keep it out. If you
-  regenerate the lock, re-pin: `cargo update -p jobserver --precise 0.1.32`.
-- `target is not supported` / `fill_inner not found` during `cargo test`: your
-  shell has `CARGO_BUILD_TARGET` (or `RUSTUP_TOOLCHAIN`) set to a Solana target,
-  so cargo builds the test binary for it instead of the host. Clear it with
-  `set -e CARGO_BUILD_TARGET`, use a fresh terminal, or pass
-  `--target x86_64-unknown-linux-gnu`.
-- Don't run `cargo build` or `cargo test` from the repo root. That compiles the
-  program natively, which its Solana 1.18 dependencies don't support. Use
-  `anchor build` for the program and run tests from `tests/`.
+![test results](test-result.png)
