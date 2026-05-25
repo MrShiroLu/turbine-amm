@@ -1,0 +1,17 @@
+# Standalone test crate — intentionally NOT a member of the program workspace.
+# The program (Anchor 0.30.1) pins the solana 1.18 crate line; LiteSVM needs
+# solana 2.2. Keeping the tests in their own crate (own lockfile) lets each side
+# resolve independently. The tests never link the `amm` crate — they load the
+# compiled `.so` and build instructions from raw bytes.
+[workspace]
+
+[package]
+name = "amm-tests"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+litesvm = "0.6"
+solana-sdk = "2.2"
+spl-token = "7"
+spl-associated-token-account = "6"
